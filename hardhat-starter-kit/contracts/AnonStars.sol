@@ -14,10 +14,10 @@ contract AnonStars {
     //Type Declarations
     // *price converter
     //State Variables
-    //many
+    // *many
     //Events
     //Modifiers
-    //owner modifier
+    // *owner modifier
     //Functions
     // *create profile - maybe superfluid send stake fee back over time, or time lock stake with VRF
     // *endorse profile - maybe superfluid send stake fee back over time, or time lock stake with VRF
