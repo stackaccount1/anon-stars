@@ -71,19 +71,21 @@ contract AnonStars {
         string memory _descriptionOfSkills,
         bytes32 _resumeLink
     ) public {
-        id++;
-        profiles.push(
-            Profile(_username, _profilePictureUrl, _descriptionOfSkills, _resumeLink, id)
-        );
-        profileToOwner[id] = msg.sender;
-        idToOwner[msg.sender] = id;
-        emit NewProfileGenerated(
-            id,
-            _username,
-            _profilePictureUrl,
-            _descriptionOfSkills,
-            _resumeLink
-        );
+        if (bytes32(idToOwner[msg.sender]).length > 0) {
+            id++;
+            profiles.push(
+                Profile(_username, _profilePictureUrl, _descriptionOfSkills, _resumeLink, id)
+            );
+            profileToOwner[id] = msg.sender;
+            idToOwner[msg.sender] = id;
+            emit NewProfileGenerated(
+                id,
+                _username,
+                _profilePictureUrl,
+                _descriptionOfSkills,
+                _resumeLink
+            );
+        }
     }
 
     function endorseProfile(address _endorsee) public {
