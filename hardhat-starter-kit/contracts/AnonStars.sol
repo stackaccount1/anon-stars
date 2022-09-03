@@ -16,8 +16,30 @@ contract AnonStars {
     // *price converter
     //State Variables
     address private immutable i_owner;
+    uint256 public id;
+
+    struct Profile {
+        string username;
+        bytes32 profilePictureUrl;
+        string descriptionOfSkills;
+        bytes32 resumeLink;
+    }
+
+    Profile[] public profiles;
+
+    mapping(uint256 => address) public profileToOwner;
+    mapping(uint256 => address) public endorsements;
+
     // *many
     //Events
+    event NewProfileGenerated(
+        uint256 id,
+        string username,
+        bytes32 profilePictureUrl,
+        string descriptionOfSkills,
+        bytes32 resumeLink
+    );
+
     //Modifiers
     modifier onlyOwner() {
         // require(msg.sender == i_owner);
@@ -32,13 +54,30 @@ contract AnonStars {
     //constructor
     constructor() {
         i_owner = msg.sender;
+        id = 0;
     }
+
     //recieve
     //fallback
     //external
     //public
-    //internal
-    //private
+    function createProfile(
+        string memory _username,
+        bytes32 _profilePictureUrl,
+        string memory _descriptionOfSkills,
+        bytes32 _resumeLink
+    ) public {
+        id++;
+        profiles.push(Profile(_username, _profilePictureUrl, _descriptionOfSkills, _resumeLink));
+        profileToOwner[id] = msg.sender;
+        emit NewProfileGenerated(
+            id,
+            _username,
+            _profilePictureUrl,
+            _descriptionOfSkills,
+            _resumeLink
+        );
+    }
     //internal
     //private
     //view / pure
