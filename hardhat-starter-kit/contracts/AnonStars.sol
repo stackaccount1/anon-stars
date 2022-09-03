@@ -17,20 +17,23 @@ contract AnonStars {
     //State Variables
     address private immutable i_owner;
     uint256 public id;
+    uint256 public endorsementId;
 
     struct Profile {
         string username;
         bytes32 profilePictureUrl;
         string descriptionOfSkills;
         bytes32 resumeLink;
+        uint256 id;
     }
 
     Profile[] public profiles;
 
     mapping(uint256 => address) public profileToOwner;
-    mapping(uint256 => address) public endorsements;
+    mapping(address => uint256) public idToOwner;
+    mapping(uint256 => address) public endorsementToAddress;
+    mapping(uint256 => uint256[]) public endorsementList;
 
-    // *many
     //Events
     event NewProfileGenerated(
         uint256 id,
@@ -55,6 +58,7 @@ contract AnonStars {
     constructor() {
         i_owner = msg.sender;
         id = 0;
+        endorsementId = 0;
     }
 
     //recieve
@@ -68,8 +72,11 @@ contract AnonStars {
         bytes32 _resumeLink
     ) public {
         id++;
-        profiles.push(Profile(_username, _profilePictureUrl, _descriptionOfSkills, _resumeLink));
+        profiles.push(
+            Profile(_username, _profilePictureUrl, _descriptionOfSkills, _resumeLink, id)
+        );
         profileToOwner[id] = msg.sender;
+        idToOwner[msg.sender] = id;
         emit NewProfileGenerated(
             id,
             _username,
@@ -77,6 +84,14 @@ contract AnonStars {
             _descriptionOfSkills,
             _resumeLink
         );
+    }
+
+    function endorseProfile(address _endorsee) public {
+        require(msg.sender != _endorsee);
+        uint256 a = idToOwner[_endorsee];
+        endorsementId++;
+        endorsementList[a].push(endorsementId);
+        endorsementToAddress[endorsementId] = msg.sender;
     }
     //internal
     //private
