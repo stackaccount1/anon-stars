@@ -95,7 +95,13 @@ contract AnonStars {
         endorsementList[a].push(endorsementId);
         endorsementToAddress[endorsementId] = msg.sender;
     }
+
     //internal
     //private
     //view / pure
+
+    function viewProfile(address _whoseThatProfile) public view returns (Profile memory) {
+        uint256 idtoreturn = idToOwner[_whoseThatProfile];
+        return profiles[idtoreturn];
+    }
 }
