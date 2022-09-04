@@ -104,4 +104,8 @@ contract AnonStars {
         uint256 idtoreturn = idToOwner[_whoseThatProfile];
         return profiles[idtoreturn];
     }
+
+    function returnId() public view returns (uint256) {
+        return id;
+    }
 }
