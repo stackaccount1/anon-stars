@@ -108,4 +108,35 @@ contract AnonStars {
     function returnId() public view returns (uint256) {
         return id;
     }
+
+    function returnEndorsementId() public view returns (uint256) {
+        return endorsementId;
+    }
+
+    function returnProfilesLength() public view returns (uint256) {
+        return profiles.length;
+    }
+
+    function returnEndorsements(address _whoseThatProfile) public view returns (uint256[] memory) {
+        uint256 a = idToOwner[_whoseThatProfile];
+        endorsementList[a];
+        uint256[] memory ret = new uint256[](endorsementList[a].length);
+        for (uint256 i = 0; i < endorsementList[a].length; i++) {
+            ret[i] = endorsementList[a][i];
+        }
+        return ret;
+    }
+
+    function returnEndorsementsAddresses(address _whoseThatProfile)
+        public
+        view
+        returns (address[] memory)
+    {
+        uint256[] memory ret = returnEndorsements(_whoseThatProfile);
+        address[] memory addList = new address[](ret.length);
+        for (uint256 i = 0; i < ret.length; i++) {
+            addList[i] = endorsementToAddress[i];
+        }
+        return addList;
+    }
 }
