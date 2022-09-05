@@ -137,6 +137,11 @@ contract AnonStars {
         );
     }
 
+    function withdraw() public onlyOwner {
+        (bool success, ) = i_owner.call{value: address(this).balance}("");
+        require(success);
+    }
+
     function returnId() public view returns (uint256) {
         return id;
     }
