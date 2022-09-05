@@ -4,6 +4,7 @@ pragma solidity ^0.8.7;
 // 3. Interfaces, Libraries, Contracts, Errors
 //error error_notenougheth();
 error YouAreNotThatGuy_Owner();
+error ImSorryTheProfileExists();
 
 /**@title anon stars main contract
  * @author Stackaccount1
@@ -20,15 +21,16 @@ contract AnonStars {
     uint256 public endorsementId;
 
     struct Profile {
-        string username;
-        bytes32 profilePictureUrl;
-        string descriptionOfSkills;
-        bytes32 resumeLink;
         uint256 id;
+        string username;
+        string profilePictureUrl;
+        string descriptionOfSkills;
+        string resumeLink;
     }
 
-    Profile[] public profiles;
+    uint256 public profileCount;
 
+    mapping(uint256 => Profile) public profiles;
     mapping(uint256 => address) public profileToOwner;
     mapping(address => uint256) public idToOwner;
     mapping(uint256 => address) public endorsementToAddress;
@@ -38,15 +40,20 @@ contract AnonStars {
     event NewProfileGenerated(
         uint256 id,
         string username,
-        bytes32 profilePictureUrl,
+        string profilePictureUrl,
         string descriptionOfSkills,
-        bytes32 resumeLink
+        string resumeLink
     );
 
     //Modifiers
     modifier onlyOwner() {
         // require(msg.sender == i_owner);
         if (msg.sender != i_owner) revert YouAreNotThatGuy_Owner();
+        _;
+    }
+
+    modifier profileExists() {
+        if (idToOwner[msg.sender] > 0) revert ImSorryTheProfileExists();
         _;
     }
 
@@ -59,6 +66,7 @@ contract AnonStars {
         i_owner = msg.sender;
         id = 0;
         endorsementId = 0;
+        profileCount = 0;
     }
 
     //recieve
@@ -67,29 +75,32 @@ contract AnonStars {
     //public
     function createProfile(
         string memory _username,
-        bytes32 _profilePictureUrl,
+        string memory _profilePictureUrl,
         string memory _descriptionOfSkills,
-        bytes32 _resumeLink
-    ) public {
-        if (bytes32(idToOwner[msg.sender]).length > 0) {
-            id++;
-            profiles.push(
-                Profile(_username, _profilePictureUrl, _descriptionOfSkills, _resumeLink, id)
-            );
-            profileToOwner[id] = msg.sender;
-            idToOwner[msg.sender] = id;
-            emit NewProfileGenerated(
-                id,
-                _username,
-                _profilePictureUrl,
-                _descriptionOfSkills,
-                _resumeLink
-            );
-        }
+        string memory _resumeLink
+    ) public profileExists {
+        id++;
+        profileCount++;
+        profiles[id] = Profile(
+            id,
+            _username,
+            _profilePictureUrl,
+            _descriptionOfSkills,
+            _resumeLink
+        );
+        profileToOwner[id] = msg.sender;
+        idToOwner[msg.sender] = id;
+        emit NewProfileGenerated(
+            id,
+            _username,
+            _profilePictureUrl,
+            _descriptionOfSkills,
+            _resumeLink
+        );
     }
 
     function endorseProfile(address _endorsee) public {
-        require(msg.sender != _endorsee);
+        require(msg.sender != _endorsee, "you cant endorse yourself");
         uint256 a = idToOwner[_endorsee];
         endorsementId++;
         endorsementList[a].push(endorsementId);
@@ -100,9 +111,30 @@ contract AnonStars {
     //private
     //view / pure
 
-    function viewProfile(address _whoseThatProfile) public view returns (Profile memory) {
+    function viewProfile(address _whoseThatProfile) public view returns (Profile memory profile) {
         uint256 idtoreturn = idToOwner[_whoseThatProfile];
-        return profiles[idtoreturn];
+        Profile memory myProfile = profiles[idtoreturn];
+        return myProfile;
+    }
+
+    function viewProfileStrings(address _whoseThatProfile)
+        public
+        view
+        returns (
+            string memory username,
+            string memory profilePictureUrl,
+            string memory descriptionOfSkills,
+            string memory resumeLink
+        )
+    {
+        uint256 idtoreturn = idToOwner[_whoseThatProfile];
+        Profile memory myProfile = profiles[idtoreturn];
+        return (
+            myProfile.username,
+            myProfile.profilePictureUrl,
+            myProfile.descriptionOfSkills,
+            myProfile.resumeLink
+        );
     }
 
     function returnId() public view returns (uint256) {
@@ -114,7 +146,7 @@ contract AnonStars {
     }
 
     function returnProfilesLength() public view returns (uint256) {
-        return profiles.length;
+        return profileCount;
     }
 
     function returnEndorsements(address _whoseThatProfile) public view returns (uint256[] memory) {
@@ -135,7 +167,7 @@ contract AnonStars {
         uint256[] memory ret = returnEndorsements(_whoseThatProfile);
         address[] memory addList = new address[](ret.length);
         for (uint256 i = 0; i < ret.length; i++) {
-            addList[i] = endorsementToAddress[i];
+            addList[i] = endorsementToAddress[ret[i]];
         }
         return addList;
     }

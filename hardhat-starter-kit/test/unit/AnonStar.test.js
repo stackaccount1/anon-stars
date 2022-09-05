@@ -1,7 +1,6 @@
 const { assert, expect } = require("chai")
-const { network, deployments, ethers } = require("hardhat")
-const { developmentChains } = require("../../helper-hardhat-config")
-const { numToBytes32 } = require("@chainlink/test-helpers/dist/src/helpers")
+const { network, deployments, ethers, getNamedAccounts } = require("hardhat")
+const { developmentChains, networkConfig } = require("../../helper-hardhat-config")
 
 !developmentChains.includes(network.name)
     ? describe.skip
@@ -39,34 +38,91 @@ const { numToBytes32 } = require("@chainlink/test-helpers/dist/src/helpers")
               it("Checks to see if the id is 1 after 1 profile submission", async () => {
                   await anonStars.createProfile(
                       "puffer",
-                      numToBytes32(0),
+                      "www.google.com/images/puffer_profile_pic",
                       "coder of the blockchain clan",
-                      numToBytes32(0)
+                      "www.github.com/stackaccount1"
                   )
                   const response = await anonStars.returnId()
                   const value = 1
                   assert.equal(response.toString(), value.toString())
               })
-              /*
-              it("Assert profile deployment matches view profile", async () => {
-                  const create = await anonStar.createProfile(
-                      "puffer",
-                      "www.google.com",
-                      "coder of the blockchain clan",
-                      "www.brave.com"
-                  )
-                  const view = await anonStar.viewProfile(deployer)
-                  assert.equal(create, view)
+              it("Assert two profiles created match", async () => {
+                  const [account, accounts1, accounts2] = await ethers.getSigners()
+                  //anonStars = anonStars.connect(accounts[0])
+                  const create = await anonStars.createProfile("1", "1", "1", "1")
+                  let one = await anonStars.viewProfileStrings(deployer)
+                  const createdos = await anonStars
+                      .connect(accounts1)
+                      .createProfile("1", "1", "1", "1")
+                  let two = await anonStars.viewProfileStrings(accounts1.address)
+                  assert.equal(one.toString(), two.toString())
               })
-              */
+              it("Creates three profiles, makes sure id is at No. 3", async () => {
+                  const [account, accounts1, accounts2] = await ethers.getSigners()
+                  //anonStars = anonStars.connect(accounts[0])
+                  const create = await anonStars.createProfile("1", "1", "1", "1")
+                  const createdos = await anonStars
+                      .connect(accounts1)
+                      .createProfile("1", "1", "1", "1")
+                  const createtres = await anonStars
+                      .connect(accounts2)
+                      .createProfile("1", "1", "1", "1")
+                  let id = await anonStars.returnId()
+                  let three = 3
+                  assert.equal(id.toString(), three.toString())
+              })
           })
-          ;async () => {
-              const printValue = await anonStars.viewProfile(deployer)
-              log(printValue)
-          }
+          describe("endorsementLogic", function () {
+              it("Checks to see if the endorser is listed", async () => {
+                  const [account, accounts1, accounts2, accounts3, accounts4] =
+                      await ethers.getSigners()
+                  const create = await anonStars.createProfile("1", "1", "1", "1")
+                  const createdos = await anonStars
+                      .connect(accounts1)
+                      .createProfile("1", "1", "1", "1")
+                  const response = await anonStars
+                      .connect(accounts1)
+                      .endorseProfile(account.address)
+                  const endorsementaddresses = await anonStars.returnEndorsementsAddresses(
+                      account.address
+                  )
+                  const two = accounts1.address
+                  assert.equal(endorsementaddresses.toString(), two.toString())
+              })
+              it("Checks to see if multiple endorsers are listed", async () => {
+                  const [account, accounts1, accounts2, accounts3, accounts4] =
+                      await ethers.getSigners()
+                  const create = await anonStars.createProfile("1", "1", "1", "1")
+                  const createdos = await anonStars
+                      .connect(accounts1)
+                      .createProfile("1", "1", "1", "1")
+                  const response = await anonStars
+                      .connect(accounts1)
+                      .endorseProfile(account.address)
+                  const responsecharlie = await anonStars
+                      .connect(accounts2)
+                      .endorseProfile(account.address)
+                  const responsealpha = await anonStars
+                      .connect(accounts3)
+                      .endorseProfile(account.address)
+                  const responsezeta = await anonStars
+                      .connect(accounts4)
+                      .endorseProfile(accounts1.address)
+                  const endorsementaddresses = await anonStars.returnEndorsementsAddresses(
+                      account.address
+                  )
+                  const endorsementaddressessecond = await anonStars.returnEndorsementsAddresses(
+                      accounts1.address
+                  )
+                  const three = accounts4.address
+                  const two = [accounts1.address, accounts2.address, accounts3.address]
+                  assert.equal(endorsementaddresses.toString(), two.toString())
+                  assert.equal(endorsementaddressessecond.toString(), three.toString())
+              })
+          })
           /*
           describe("withdraw", function () {
-              beforeEach(async () => {
+              beforeEach(async () => { 
                   await fundMe.fund(["puffer","www.google.com", "coder of the blockchain clan", "www.brave.com"])
               })
               it("withdraws ETH from a single funder", async () => {
