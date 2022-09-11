@@ -10,7 +10,7 @@ export default function ViewProfile() {
   const one = signer;
   console.log(signer);
   const chainId = 4;
-  const contractRead = useContractRead({
+  const { data } = useContractRead({
     addressOrName: contractAddresses[chainId][0],
     contractInterface: abiFile,
     chainId: 4,
@@ -19,7 +19,7 @@ export default function ViewProfile() {
   });
   const viewprofile = stringify(contractRead.data);
   console.log("Return id____________________________________________");
-  console.log(viewprofile);
+  console.log(data);
   /*
   let number = ethers.BigNumber.from(data.toString());
   number = number.toString();

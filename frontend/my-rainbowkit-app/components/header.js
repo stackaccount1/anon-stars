@@ -12,22 +12,22 @@ export default function Header() {
       <Image src="/wordart.png" width="325" height="64" className="relative" />
       <div className="absolute bottom-0 right-0 h-16">
         <Link href="/createprofile">
-          <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             Create Profile
           </button>
         </Link>
         <Link href="/endorseaprofile">
-          <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             Endorse Your Peers
           </button>
         </Link>
         <Link href="/viewprofile">
-          <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             View Your Profile
           </button>
         </Link>
         <Link href="/searchprofiles">
-          <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             Browse Profiles
           </button>
         </Link>
