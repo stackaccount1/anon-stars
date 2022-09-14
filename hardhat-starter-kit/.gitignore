@@ -101,3 +101,8 @@ lint/tmp/
 gas-report.txt
 
 contracts/test/fuzzing/crytic-export
+
+alchemykey.json
+static/webpack
+webpack
+alchemykeys.json

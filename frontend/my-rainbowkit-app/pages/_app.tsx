@@ -30,6 +30,7 @@ const localChain: Chain = {
 const { chains, provider, webSocketProvider } = configureChains(
   [
     localChain,
+    chain.polygonMumbai,
     chain.mainnet,
     chain.polygon,
     chain.optimism,

@@ -19,19 +19,21 @@ export default function Endorse() {
     setProfile({ ...profile, [event.target.name]: event.target.value });
   };
 
-  const one = profile.address;
-
   const {
     config,
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    addressOrName: contractAddresses[4][0],
-    chainId: 4,
+    addressOrName: contractAddresses[80001][0],
+    chainId: 80001,
     contractInterface: abiFile,
     functionName: "endorseProfile",
-    args: [one],
+    args: [profile.address],
   });
+
+  console.log(profile);
+  console.log(profile.toString());
+
   const { data, error, isError, write } = useContractWrite(config);
 
   const { isLoading, isSuccess } = useWaitForTransaction({
@@ -91,7 +93,7 @@ export default function Endorse() {
             </button>
             {isSuccess && (
               <div>
-                Successfully created your profile!
+                Successfully endorsed your peer
                 <div>
                   <a href={`https://etherscan.io/tx/${data?.hash}`}>
                     Etherscan

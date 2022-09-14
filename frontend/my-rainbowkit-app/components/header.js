@@ -26,9 +26,9 @@ export default function Header() {
             View Your Profile
           </button>
         </Link>
-        <Link href="/searchprofiles">
+        <Link href="/endorsements">
           <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-            Browse Profiles
+            View Your Endorsements
           </button>
         </Link>
       </div>

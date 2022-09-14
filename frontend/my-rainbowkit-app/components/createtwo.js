@@ -29,8 +29,8 @@ export default function CreateTwo() {
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    addressOrName: contractAddresses[4][0],
-    chainId: 4,
+    addressOrName: contractAddresses[80001][0],
+    chainId: 80001,
     contractInterface: abiFile,
     functionName: "createProfile",
     args: [one, two, three, four],

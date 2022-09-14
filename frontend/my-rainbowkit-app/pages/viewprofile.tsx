@@ -1,4 +1,3 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import type { NextPage } from 'next';
 import ViewProfile from "../components/viewProfile";
 import Head from 'next/head';
