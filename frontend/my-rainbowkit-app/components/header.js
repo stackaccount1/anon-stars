@@ -31,6 +31,11 @@ export default function Header() {
             View Your Endorsements
           </button>
         </Link>
+        <Link href="/page">
+          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+            View Detailed Profile
+          </button>
+        </Link>
       </div>
       <div className="absolute top-4 right-0 h-16">
         <ConnectButton />

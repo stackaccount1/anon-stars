@@ -25,10 +25,25 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/profilepage": [
+    "/createprofile": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/profilepage.js"
+      "static/chunks/pages/createprofile.js"
+    ],
+    "/endorseaprofile": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/endorseaprofile.js"
+    ],
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/page.js"
+    ],
+    "/viewprofile": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/viewprofile.js"
     ]
   },
   "ampFirstPages": []
