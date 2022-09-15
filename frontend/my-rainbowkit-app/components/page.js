@@ -1,11 +1,12 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { contractAddresses, abiFile, alchemyKey } from "../constants";
-import { ethers, getAddress } from "ethers";
-import { useSigner } from "wagmi";
+import { ethers } from "ethers";
+import { useSigner, useAccount, useConnect, useContractRead } from "wagmi";
 
 export default function Page() {
-  const [finalAddress, setAddress] = useState("");
+  const { connector: activeConnector, isConnected, address } = useAccount();
+  const [finalAddress, setAddress] = useState(address);
   const [endorsees, setEndorsees] = useState("");
   const [count, setCount] = useState("");
   const [info0, setInfo0] = useState("");
@@ -24,79 +25,133 @@ export default function Page() {
   const [info13, setInfo13] = useState("");
   const [info14, setInfo14] = useState("");
   const [info15, setInfo15] = useState("");
-  const { data: signer, isError, isLoading } = useSigner();
-  const alchemyKeyUrl = alchemyKey[80001][0];
-  // Alchemy contract set up
-  const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-  const web3 = createAlchemyWeb3(alchemyKeyUrl);
-  const anonStarsContract = new web3.eth.Contract(
-    abiFile,
-    contractAddresses[80001][0]
-  );
-  // Signer getAddress Setup
-  (async () => {
-    const finaladdressusestate = await signer.getAddress();
-    setAddress(finaladdressusestate);
-  })();
-  // Return Endorsers Setup
-  (async () => {
-    const function_return = await anonStarsContract.methods
-      .returnEndorsementsAddresses(finalAddress.toString())
-      .call();
-    console.log(function_return);
-    setEndorsees(function_return);
-    return function_return;
-  })();
 
-  (async () => {
-    const function_return = await anonStarsContract.methods
-      .viewProfileStrings(finalAddress.toString())
-      .call();
-    console.log("HERE___________________________________", function_return);
-    setInfo0(function_return[0]);
-    setInfo1(function_return[1]);
-    setInfo2(function_return[2]);
-    setInfo3(function_return[3]);
-  })();
+  // Connected?
+  console.log(isConnected);
 
-  (async () => {
-    const function_return = await anonStarsContract.methods
+  const endorseesRead = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "returnEndorsementsAddresses",
+    args: address,
+    onSuccess(data) {
+      console.log(data);
+      setEndorsees(data);
+    },
+  });
+
+  const profileOneRead = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "viewProfileStrings",
+    args: address,
+    onSuccess(data) {
+      console.log(data);
+      setInfo0(data[0]);
+      setInfo1(data[1]);
+      setInfo2(data[2]);
+      setInfo3(data[3]);
+    },
+  });
+
+  const profileTwoRead = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "viewProfileStrings",
+    args: endorsees[1],
+    onSuccess(data) {
+      console.log(data);
+      setInfo4(data[0]);
+      setInfo5(data[1]);
+      setInfo6(data[2]);
+      setInfo7(data[3]);
+    },
+  });
+
+  const profileThreeRead = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "viewProfileStrings",
+    args: endorsees[2],
+    onSuccess(data) {
+      console.log(data);
+      setInfo8(data[0]);
+      setInfo9(data[1]);
+      setInfo10(data[2]);
+      setInfo11(data[3]);
+    },
+  });
+
+  const profileFourRead = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "viewProfileStrings",
+    args: endorsees[3],
+    onSuccess(data) {
+      console.log(data);
+      setInfo12(data[0]);
+      setInfo13(data[1]);
+      setInfo14(data[2]);
+      setInfo15(data[3]);
+    },
+  });
+  /*
+  async function updateUiValues() {
+    /*
+    console.log("processed address for profile updates", address);
+    const functionReturnEndorseeObject = await anonStarsContract.methods
+      .returnEndorsementsAddresses(address)
+      .call();
+    setEndorsees(functionReturnEndorseeObject);
+    */
+  /*
+    const { functionReturnProfileObjectOne } = await anonStarsContract.methods
+      .viewProfileStrings(address.toString())
+      .call();
+    setInfo0(functionReturnProfileObjectOne[0]);
+    setInfo1(functionReturnProfileObjectOne[1]);
+    setInfo2(functionReturnProfileObjectOne[2]);
+    setInfo3(functionReturnProfileObjectOne[3]);
+
+    const { functionReturnProfileObjectTwo } = await anonStarsContract.methods
       .viewProfileStrings(endorsees[count + 1].toString())
       .call();
-    console.log("HERE___________________________________", function_return);
-    setInfo4(function_return[0]);
-    setInfo5(function_return[1]);
-    setInfo6(function_return[2]);
-    setInfo7(function_return[3]);
-  })();
+    setInfo4(functionReturnProfileObjectTwo[0]);
+    setInfo5(functionReturnProfileObjectTwo[1]);
+    setInfo6(functionReturnProfileObjectTwo[2]);
+    setInfo7(functionReturnProfileObjectTwo[3]);
 
-  (async () => {
-    const function_return = await anonStarsContract.methods
+    const { functionReturnProfileObjectThree } = await anonStarsContract.methods
       .viewProfileStrings(endorsees[count + 2].toString())
       .call();
-    console.log("HERE___________________________________", function_return);
-    setInfo8(function_return[0]);
-    setInfo9(function_return[1]);
-    setInfo10(function_return[2]);
-    setInfo11(function_return[3]);
-  })();
+    setInfo8(functionReturnProfileObjectThree[0]);
+    setInfo9(functionReturnProfileObjectThree[1]);
+    setInfo10(functionReturnProfileObjectThree[2]);
+    setInfo11(functionReturnProfileObjectThree[3]);
 
-  (async () => {
-    const function_return = await anonStarsContract.methods
+    const { functionReturnProfileObjectFour } = await anonStarsContract.methods
       .viewProfileStrings(endorsees[count + 3].toString())
       .call();
-    console.log("HERE___________________________________", function_return);
-    setInfo8(function_return[0]);
-    setInfo9(function_return[1]);
-    setInfo10(function_return[2]);
-    setInfo11(function_return[3]);
-  })();
-
+    setInfo12(functionReturnProfileObjectFour[0]);
+    setInfo13(functionReturnProfileObjectFour[1]);
+    setInfo14(functionReturnProfileObjectFour[2]);
+    setInfo15(functionReturnProfileObjectFour[3]);
+  }
+  */
   // Dynamic Loop Set up
   const increment = () => {
     setCount((prev) => prev + 4);
   };
-
+  /*
+  useEffect(() => {
+    if (isConnected) {
+      const timer = setTimeout(() => {
+        updateUiValues();
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [isConnected]);
+  */
   return (
     <div class="container mx-auto my-5 p-5">
       <div class="md:flex no-wrap md:-mx-2 ">
@@ -325,3 +380,24 @@ export default function Page() {
     </div>
   );
 }
+
+/*
+  async function getSignerAddressFromWagmi(signer) {
+    const finaladdressusestate = await signer.getAddress();
+    setAddress(finaladdressusestate);
+    console.log("address set as=", finaladdressusestate);
+    return finaladdressusestate;
+  }
+
+  // Signer getAddress Setup
+  function signInPlease(signer) {
+    try {
+      getSignerAddressFromWagmi(signer);
+    } catch (error) {
+      getSignerAddressFromWagmi(signer);
+      console.log("signer acquired head back to base, almost errored out here");
+      console.log("address set");
+    }
+  }
+  signInPlease();
+  */

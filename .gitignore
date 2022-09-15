@@ -106,3 +106,6 @@ alchemykeys.json
 alchemykey.json
 static/webpack
 webpack
+frontend/my-rainbowkit-app/.next/cache/webpack/
+frontend/my-rainbowkit-app/.next/static/chunks/
+frontend/my-rainbowkit-app/.next/server/pages/
