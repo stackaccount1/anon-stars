@@ -100,6 +100,12 @@ lint/tmp/
 
 gas-report.txt
 
+cache*
+alchemykey*
+alchemykeys*
+server*
+static*
+
 contracts/test/fuzzing/crytic-export
 
 alchemykeys.json

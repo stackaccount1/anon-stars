@@ -27,11 +27,6 @@ export default function ExperimentPage() {
     },
   });
 
-  //setInfo0(contractRead[0]);
-  //setInfo1(contractRead[1]);
-  //setInfo2(contractRead[2]);
-  //setInfo3(contractRead[3]);
-
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-t from-yellow-200 via-lime-400 to-red-800">
       <div className="w-full max-w-md space-y-8">
