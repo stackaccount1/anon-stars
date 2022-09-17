@@ -25,6 +25,11 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/createprofile": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/createprofile.js"
+    ],
     "/endorseaprofile": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

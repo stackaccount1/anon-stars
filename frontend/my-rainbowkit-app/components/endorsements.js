@@ -1,11 +1,12 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { contractAddresses, abiFile, alchemyKey } from "../constants";
-import { ethers, getAddress } from "ethers";
-import { useSigner } from "wagmi";
+import { ethers } from "ethers";
+import { useSigner, useAccount, useConnect, useContractRead } from "wagmi";
 
 export default function Endorsements() {
-  const [finalAddress, setAddress] = useState("");
+  const { connector: activeConnector, isConnected, address } = useAccount();
+  const [finalAddress, setAddress] = useState(address);
   const [endorsees, setEndorsees] = useState("");
   const [count, setCount] = useState("");
   const [info0, setInfo0] = useState("");
@@ -20,67 +21,90 @@ export default function Endorsements() {
   const [info9, setInfo9] = useState("");
   const [info10, setInfo10] = useState("");
   const [info11, setInfo11] = useState("");
-  const { data: signer, isError, isLoading } = useSigner();
-  const alchemyKeyUrl = alchemyKey[80001][0];
-  // Alchemy contract set up
-  const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-  const web3 = createAlchemyWeb3(alchemyKeyUrl);
-  const anonStarsContract = new web3.eth.Contract(
-    abiFile,
-    contractAddresses[80001][0]
-  );
-  // Signer getAddress Setup
-  (async () => {
-    const finaladdressusestate = await signer.getAddress();
-    setAddress(finaladdressusestate);
-  })();
-  // Return Endorsers Setup
-  (async () => {
-    const function_return = await anonStarsContract.methods
-      .returnEndorsementsAddresses(finalAddress.toString())
-      .call();
-    console.log(function_return);
-    setEndorsees(function_return);
-    return function_return;
-  })();
+  const [info12, setInfo12] = useState("");
+  const [info13, setInfo13] = useState("");
+  const [info14, setInfo14] = useState("");
+  const [info15, setInfo15] = useState("");
 
-  (async () => {
-    const function_return = await anonStarsContract.methods
-      .viewProfileStrings(endorsees[count].toString())
-      .call();
-    console.log("HERE___________________________________", function_return);
-    setInfo0(function_return[0]);
-    setInfo1(function_return[1]);
-    setInfo2(function_return[2]);
-    setInfo3(function_return[3]);
-  })();
+  // Connected?
+  console.log(isConnected);
 
-  (async () => {
-    const function_return = await anonStarsContract.methods
-      .viewProfileStrings(endorsees[count + 1].toString())
-      .call();
-    console.log("HERE___________________________________", function_return);
-    setInfo4(function_return[0]);
-    setInfo5(function_return[1]);
-    setInfo6(function_return[2]);
-    setInfo7(function_return[3]);
-  })();
+  const endorseesRead = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "returnEndorsementsAddresses",
+    args: address,
+    onSuccess(data) {
+      console.log(data);
+      setEndorsees(data);
+    },
+  });
 
-  (async () => {
-    const function_return = await anonStarsContract.methods
-      .viewProfileStrings(endorsees[count + 2].toString())
-      .call();
-    console.log("HERE___________________________________", function_return);
-    setInfo8(function_return[0]);
-    setInfo9(function_return[1]);
-    setInfo10(function_return[2]);
-    setInfo11(function_return[3]);
-  })();
+  const profileOneRead = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "viewProfileStrings",
+    args: endorsees[0],
+    onSuccess(data) {
+      console.log(data);
+      setInfo0(data[0]);
+      setInfo1(data[1]);
+      setInfo2(data[2]);
+      setInfo3(data[3]);
+    },
+  });
+
+  const profileTwoRead = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "viewProfileStrings",
+    args: endorsees[1],
+    onSuccess(data) {
+      console.log(data);
+      setInfo4(data[0]);
+      setInfo5(data[1]);
+      setInfo6(data[2]);
+      setInfo7(data[3]);
+    },
+  });
+
+  const profileThreeRead = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "viewProfileStrings",
+    args: endorsees[2],
+    onSuccess(data) {
+      console.log(data);
+      setInfo8(data[0]);
+      setInfo9(data[1]);
+      setInfo10(data[2]);
+      setInfo11(data[3]);
+    },
+  });
+
+  const profileFourRead = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "viewProfileStrings",
+    args: endorsees[3],
+    onSuccess(data) {
+      console.log(data);
+      setInfo12(data[0]);
+      setInfo13(data[1]);
+      setInfo14(data[2]);
+      setInfo15(data[3]);
+    },
+  });
 
   // Dynamic Loop Set up
   const increment = () => {
     setCount((prev) => prev + 4);
   };
+
+  useEffect(() => {
+    if (isConnected) {
+    }
+  }, [isConnected]);
 
   return (
     <div className="flex min-h-full items-stretch justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-transparent via-rose-800 to-neutral-900">
@@ -111,6 +135,14 @@ export default function Endorsements() {
               <strong>{info8}</strong>
               <span>{info10}</span>
               <span>{info11}</span>
+            </div>
+          </div>
+          <div class="flex items-center bg-gradient-to-t from-yellow-200 via-lime-400 to-red-800">
+            <img src={info13} className="h-24 w-24" />
+            <div>
+              <strong>{info12}</strong>
+              <span>{info14}</span>
+              <span>{info15}</span>
             </div>
           </div>
           <button

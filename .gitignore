@@ -109,3 +109,12 @@ webpack
 frontend/my-rainbowkit-app/.next/cache/webpack/
 frontend/my-rainbowkit-app/.next/static/chunks/
 frontend/my-rainbowkit-app/.next/server/pages/
+frontend/my-rainbowkit-app/.next/cache/webpack
+frontend/my-rainbowkit-app/.next/static/chunks
+frontend/my-rainbowkit-app/.next/server/pages
+frontend/my-rainbowkit-app/.next/cache
+frontend/my-rainbowkit-app/.next
+frontend/my-rainbowkit-app/.next/cache/
+frontend/my-rainbowkit-app/.next/
+frontend/my-rainbowkit-app/.next/cache/webpack/client-development/
+frontend/my-rainbowkit-app/.next/cache/webpack/client-development

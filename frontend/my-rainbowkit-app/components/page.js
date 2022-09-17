@@ -40,6 +40,8 @@ export default function Page() {
     },
   });
 
+  console.log(endorsees);
+
   const profileOneRead = useContractRead({
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
@@ -67,6 +69,8 @@ export default function Page() {
       setInfo7(data[3]);
     },
   });
+
+  console.log("endorsees list", endorsees);
 
   const profileThreeRead = useContractRead({
     addressOrName: contractAddresses[80001][0],

@@ -3,5 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/viewprofile": "pages/viewprofile.js",
-  "/endorseaprofile": "pages/endorseaprofile.js"
+  "/endorseaprofile": "pages/endorseaprofile.js",
+  "/createprofile": "pages/createprofile.js"
 }
