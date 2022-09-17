@@ -118,3 +118,10 @@ frontend/my-rainbowkit-app/.next/cache/
 frontend/my-rainbowkit-app/.next/
 frontend/my-rainbowkit-app/.next/cache/webpack/client-development/
 frontend/my-rainbowkit-app/.next/cache/webpack/client-development
+frontend/my-rainbowkit-app/.next/cache
+frontend/my-rainbowkit-app/.next/server
+frontend/my-rainbowkit-app/.next/server/
+frontend/my-rainbowkit-app/.next/static
+frontend/my-rainbowkit-app/.next/static/
+frontend/my-rainbowkit-app/constants/alchemykey.json
+frontend/my-rainbowkit-app/constants/alchemykeys.json
