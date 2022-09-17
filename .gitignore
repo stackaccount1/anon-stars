@@ -101,8 +101,8 @@ lint/tmp/
 gas-report.txt
 
 cache*
-alchemykey*
-alchemykeys*
+alchemyKey*
+alchemyKeys*
 server*
 static*
 
