@@ -102,19 +102,19 @@ gas-report.txt
 
 contracts/test/fuzzing/crytic-export
 
-alchemykeys.json
-alchemykey.json
+my-rainbowkit-app/constants/alchemykeys.json
+my-rainbowkit-app/constants/alchemykey.json
 static/webpack
 webpack
-frontend/my-rainbowkit-app/.next/cache/webpack/
-frontend/my-rainbowkit-app/.next/static/chunks/
-frontend/my-rainbowkit-app/.next/server/pages/
-frontend/my-rainbowkit-app/.next/cache/webpack
-frontend/my-rainbowkit-app/.next/static/chunks
-frontend/my-rainbowkit-app/.next/server/pages
-frontend/my-rainbowkit-app/.next/cache
-frontend/my-rainbowkit-app/.next
-frontend/my-rainbowkit-app/.next/cache/
-frontend/my-rainbowkit-app/.next/
-frontend/my-rainbowkit-app/.next/cache/webpack/client-development/
-frontend/my-rainbowkit-app/.next/cache/webpack/client-development
+my-rainbowkit-app/.next/cache/webpack/
+my-rainbowkit-app/.next/static/chunks/
+my-rainbowkit-app/.next/server/pages/
+my-rainbowkit-app/.next/cache/webpack
+my-rainbowkit-app/.next/static/chunks
+my-rainbowkit-app/.next/server/pages
+my-rainbowkit-app/.next/cache
+my-rainbowkit-app/.next
+my-rainbowkit-app/.next/cache/
+my-rainbowkit-app/.next/
+my-rainbowkit-app/.next/cache/webpack/client-development/
+my-rainbowkit-app/.next/cache/webpack/client-development
