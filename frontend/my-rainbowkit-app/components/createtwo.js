@@ -1,5 +1,6 @@
 import * as React from "react";
 import { contractAddresses, abiFile } from "../constants";
+import { ethers, utils } from "ethers";
 import { useState } from "react";
 import {
   usePrepareContractWrite,
@@ -13,6 +14,9 @@ export default function CreateTwo() {
     profilePictureUrl: "",
     descriptionOfSkills: "",
     resumeLink: "",
+    emailAddress: "",
+    phone: "",
+    jobSeekingStatus: "",
   });
 
   const handleChange = (event) => {
@@ -23,6 +27,9 @@ export default function CreateTwo() {
   const two = profile.profilePictureUrl;
   const three = profile.descriptionOfSkills;
   const four = profile.resumeLink;
+  const five = profile.emailAddress;
+  const six = profile.phone;
+  const seven = profile.jobSeekingStatus;
 
   const {
     config,
@@ -33,8 +40,18 @@ export default function CreateTwo() {
     chainId: 80001,
     contractInterface: abiFile,
     functionName: "createProfile",
-    args: [one, two, three, four],
+    args: [one, two, three, four, five, six, seven],
+    overrides: {
+      value: ethers.utils.parseEther("0.01"),
+    },
   });
+
+  /*
+      overrides: {
+      value: ethers.utils.parseEther("0.01"),
+    },
+  */
+
   const { data, error, isError, write } = useContractWrite(config);
 
   const { isLoading, isSuccess } = useWaitForTransaction({
@@ -98,23 +115,43 @@ export default function CreateTwo() {
                 />
               </label>
             </div>
+            <div>
+              <label>
+                Email Address: "yonder@protonmail.com"
+                <input
+                  type="text"
+                  name="emailAddress"
+                  onChange={handleChange}
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                Phone Number: "*67"
+                <input type="text" name="phone" onChange={handleChange} />
+              </label>
+            </div>
+            <div>
+              <label>
+                Job Seeking Status: "I am available for consulting at $55 per
+                hour"
+                <input
+                  type="text"
+                  name="jobSeekingStatus"
+                  onChange={handleChange}
+                />
+              </label>
+            </div>
           </div>
-
           <div className="flex items-center justify-between">
-            <div className="flex items-center"></div>
-
             <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
+              <p>
                 *Please double check all information, the blockchain is
                 immutable, this is your profile match to your address, changes
                 can not be made!*
-              </a>
+              </p>
             </div>
           </div>
-
           <div>
             <button
               type="submit"

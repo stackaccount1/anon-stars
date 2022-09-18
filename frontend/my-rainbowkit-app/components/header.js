@@ -21,7 +21,7 @@ export default function Header() {
             Endorse Your Peers
           </button>
         </Link>
-        <Link href="/viewprofile">
+        <Link href="/page">
           <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             View Your Profile
           </button>
@@ -29,11 +29,6 @@ export default function Header() {
         <Link href="/endorsements">
           <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             View Your Endorsements
-          </button>
-        </Link>
-        <Link href="/page">
-          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-            View Detailed Profile
           </button>
         </Link>
       </div>

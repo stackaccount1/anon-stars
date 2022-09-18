@@ -60,7 +60,7 @@ export default function Page() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "viewProfileStrings",
-    args: endorsees[1],
+    args: endorsees[0],
     onSuccess(data) {
       console.log(data);
       setInfo4(data[0]);
@@ -76,7 +76,7 @@ export default function Page() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "viewProfileStrings",
-    args: endorsees[2],
+    args: endorsees[1],
     onSuccess(data) {
       console.log(data);
       setInfo8(data[0]);
@@ -90,7 +90,7 @@ export default function Page() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "viewProfileStrings",
-    args: endorsees[3],
+    args: endorsees[2],
     onSuccess(data) {
       console.log(data);
       setInfo12(data[0]);

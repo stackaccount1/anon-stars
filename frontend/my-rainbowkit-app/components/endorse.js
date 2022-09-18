@@ -1,5 +1,6 @@
 import * as React from "react";
 import { contractAddresses, abiFile } from "../constants";
+import { ethers } from "ethers";
 import { useState } from "react";
 import {
   usePrepareContractWrite,
@@ -29,6 +30,9 @@ export default function Endorse() {
     contractInterface: abiFile,
     functionName: "endorseProfile",
     args: [profile.address],
+    overrides: {
+      value: ethers.utils.parseEther("0.01"),
+    },
   });
 
   console.log(profile);
