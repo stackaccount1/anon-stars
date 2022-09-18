@@ -11,6 +11,11 @@ export default function Header() {
       />
       <Image src="/wordart.png" width="325" height="64" className="relative" />
       <div className="absolute bottom-0 right-0 h-16">
+        <Link href="/page">
+          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+            Discover All-star Anons!
+          </button>
+        </Link>
         <Link href="/createprofile">
           <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             Create Profile
@@ -29,6 +34,11 @@ export default function Header() {
         <Link href="/endorsements">
           <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             View Your Endorsements
+          </button>
+        </Link>
+        <Link href="/page">
+          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+            About Anon-Stars
           </button>
         </Link>
       </div>
