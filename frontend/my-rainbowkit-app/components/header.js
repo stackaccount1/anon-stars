@@ -31,6 +31,11 @@ export default function Header() {
             View Your Profile
           </button>
         </Link>
+        <Link href="/modifyprofile">
+          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+            Modify Your Profile
+          </button>
+        </Link>
         <Link href="/endorsements">
           <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             View Your Endorsements
