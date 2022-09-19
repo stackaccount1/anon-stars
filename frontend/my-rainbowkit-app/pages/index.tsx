@@ -1,6 +1,5 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import type { NextPage } from 'next';
-import CreateProfile from "../components/ createprofile";
 import ViewProfile from "../components/viewProfile";
 import CreateTwo from "../components/createtwo";
 import Head from 'next/head';
@@ -23,9 +22,6 @@ const Home: NextPage = () => {
         <CreateTwo />
       </main>
       <footer className={styles.footer}>
-        <a href="https://rainbow.me" target="_blank" rel="noopener noreferrer">
-          Made with ❤️ by your frens at 🌈
-        </a>
       </footer>
     </div>
   );
