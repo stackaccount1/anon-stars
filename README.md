@@ -7,5 +7,8 @@ Solidity, Hardhat, React, Next.js, Deployed on Polygon. Pay the contract .01 mat
 
 
 
-https://user-images.githubusercontent.com/61128114/190949107-f32ace29-e919-4b95-ba0e-989e77aeb25f.mp4
+
+https://user-images.githubusercontent.com/61128114/191338787-9b4eacf9-51dc-40f5-9e17-ae950936a3da.mp4
+
+
 
