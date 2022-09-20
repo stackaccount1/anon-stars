@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import ViewProfile from "../components/viewProfile";
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-//import { loadComponents } from 'next/dist/server/load-components';
 
 const Home: NextPage = () => {
   return (
