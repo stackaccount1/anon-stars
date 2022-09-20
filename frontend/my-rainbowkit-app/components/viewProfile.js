@@ -31,45 +31,23 @@ export default function ViewProfile() {
   const [info13, setInfo13] = useState("");
   const [info14, setInfo14] = useState("");
   const [info15, setInfo15] = useState("");
-  //sismo badge logic
-  const provider = new ethers.providers.InfuraProvider(137, apiKey[137]);
-
-  // Badges contract address on Polygon Playground
-  const badgesContractAddress = "0x71a7089C56DFf528f330Bc0116C0917cd05B51Fc";
-
-  const badgesContract = new Contract(
-    badgesContractAddress,
-    BadgesABI,
-    provider
-  );
-
-  const aliceAddress = "0xF61CabBa1e6FC166A66bcA0fcaa83762EdB6D4Bd";
-
-  // token id of the Ethereum Power User badge
-  const EthereumPowerUserTokenId = 10000005;
-
-  // query the balance of Alice
-  async function sismocall() {
-    const balance = await badgesContract.balanceOf(
-      aliceAddress,
-      EthereumPowerUserTokenId
-    );
-    console.log(balance);
-    setBadgeBal(balance);
-  }
-
-  sismocall();
-  /*
-  // check if the balance of Alice is greater than zero
-  if (badgeBal.gt(0)) {
-    console.log("You have the Ethereum Power User badge, well done!");
-  } else {
-    console.log("You don't have the Ethereum Power User badge.");
-  }
-  */
 
   // Connected?
   console.log(isConnected);
+  //Sismo Logic
+  const aliceAddress = "0xF61CabBa1e6FC166A66bcA0fcaa83762EdB6D4Bd";
+
+  const readSismo = useContractRead({
+    addressOrName: contractAddresses[137][0],
+    contractInterface: BadgesABI,
+    chainId: 137,
+    functionName: "balanceOf",
+    args: aliceAddress,
+    onSuccess(data) {
+      console.log("sismo badge data: ", data);
+      setBadgeBal(data);
+    },
+  });
 
   const endorseesRead = useContractRead({
     addressOrName: contractAddresses[80001][0],
@@ -212,6 +190,7 @@ export default function ViewProfile() {
                 </svg>
               </span>
               <span>Sismo ZK Badges</span>
+              <span>{badgeBal}</span>
             </div>
             <div class="grid grid-cols-3">
               <div class="text-center my-2">
