@@ -9,13 +9,14 @@ export default function Discover() {
   const { connector: activeConnector, isConnected, address } = useAccount();
   const [finalAddress, setAddress] = useState(address);
   const [endorsees, setEndorsees] = useState("");
+  const [numberListTransportOne, setNumberListTransportOne] = useState("");
   const [profileOne, setProfileOne] = useState("");
   const [profileTwo, setProfileTwo] = useState("");
   const [profileThree, setProfileThree] = useState("");
   const [profileFour, setProfileFour] = useState("");
   const [profileFive, setProfileFive] = useState("");
   const [profileSix, setProfileSix] = useState("");
-  const [count, setCount] = useState("");
+  const [count, setCount] = useState("6");
   const [info0, setInfo0] = useState("");
   const [info1, setInfo1] = useState("");
   const [info2, setInfo2] = useState("");
@@ -44,42 +45,51 @@ export default function Discover() {
   // Connected?
   console.log(isConnected);
 
+  function populateArrayOfRand(count) {
+    let numberListTransport = [];
+    for (let i = 0; i <= 6; i++) {
+      let a = Math.floor(Math.random() * parseInt(count) + 1);
+      if (numberListTransport.includes(a)) {
+        console.log("already in list:", a);
+      } else {
+        numberListTransport.push(a);
+      }
+    }
+    return numberListTransport;
+  }
+
+  //let numberListTransport = populateArrayOfRand(count);
+  let numberListTransport = [];
+  let numberList = [];
+  //populateArrayOfRand(count);
+  //const randInteger = Math.floor(Math.random() * parseInt(count) + 1);
+  //console.log("here is a random int ", randInteger);
+  //console.log(numberList);
+
   const readLength = useContractRead({
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "returnProfilesLength",
     onSuccess(data) {
-      console.log("profiles length is:", data);
-      setCount(data);
+      console.log("profiles length is:", data.toString());
+      setCount(data.toString());
+      setNumberListTransportOne(
+        (numberListTransport = populateArrayOfRand(count))
+      );
     },
   });
 
-  const theNumber = parseInt(count, 16);
-
-  function getRandomIntInclusive(max) {
-    Math.floor(Math.random() * (max + 1)); // The maximum is inclusive and the minimum is inclusive
-  }
-
-  let numberList = [];
-
-  function populateArrayOfRand(count) {
-    for (let i = 0; i < 7; i++) {
-      let a = getRandomIntInclusive(count);
-      numberList.push(a);
-      console.log(a);
-    }
-  }
-
-  populateArrayOfRand(count);
-  console.log(numberList);
+  console.log("profile pulling from Ids");
+  console.log("Rand List:", numberListTransportOne);
+  console.log("count:", count);
 
   const readProfileOne = useContractRead({
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "returnAddressFromIdNumber",
-    args: numberList[0],
+    args: numberListTransportOne[0],
     onSuccess(data) {
-      console.log(data);
+      console.log("profile one data set:", data);
       setProfileOne(data);
     },
   });
@@ -88,7 +98,7 @@ export default function Discover() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "returnAddressFromIdNumber",
-    args: numberList[1],
+    args: numberListTransportOne[1],
     onSuccess(data) {
       console.log(data);
       setProfileTwo(data);
@@ -99,7 +109,7 @@ export default function Discover() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "returnAddressFromIdNumber",
-    args: numberList[2],
+    args: numberListTransportOne[2],
     onSuccess(data) {
       console.log(data);
       setProfileThree(data);
@@ -110,7 +120,7 @@ export default function Discover() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "returnAddressFromIdNumber",
-    args: numberList[3],
+    args: numberListTransportOne[3],
     onSuccess(data) {
       console.log(data);
       setProfileFour(data);
@@ -121,7 +131,7 @@ export default function Discover() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "returnAddressFromIdNumber",
-    args: numberList[4],
+    args: numberListTransportOne[4],
     onSuccess(data) {
       console.log(data);
       setProfileFive(data);
@@ -132,14 +142,18 @@ export default function Discover() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "returnAddressFromIdNumber",
-    args: numberList[5],
+    args: numberListTransportOne[5],
     onSuccess(data) {
       console.log(data);
       setProfileSix(data);
     },
   });
 
-  //Need to modify contract to move forward
+  //Read From Contract
+  console.log("Read Addresses");
+  console.log(profileOne);
+  console.log(profileTwo);
+  console.log(profileThree);
 
   const profileOneRead = useContractRead({
     addressOrName: contractAddresses[80001][0],
@@ -230,11 +244,18 @@ export default function Discover() {
     setCount((prev) => prev + 4);
   };
 
+  //Read From Contract
+  console.log("Read Addresses");
+  console.log(profileOne);
+  console.log(profileTwo);
+  console.log(profileThree);
+
+  /*
   useEffect(() => {
     if (isConnected) {
     }
   }, [isConnected]);
-
+  */
   return (
     <div class="grid grid-cols-3 gap-2">
       <div class="relative max-w-md mx-auto md:max-w-2xl mt-6 min-w-0 break-words w-full mb-6 shadow-lg rounded-xl mt-16 bg-white">

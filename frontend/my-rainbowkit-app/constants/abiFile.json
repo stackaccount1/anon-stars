@@ -2,6 +2,19 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_fee",
+				"type": "uint256"
+			}
+		],
+		"name": "changeFee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "_username",
 				"type": "string"
@@ -20,11 +33,69 @@
 				"internalType": "string",
 				"name": "_resumeLink",
 				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_emailAddress",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_phone",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_jobSeekingStatus",
+				"type": "string"
+			}
+		],
+		"name": "changeProfileInformation",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_username",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_profilePictureUrl",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_descriptionOfSkills",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_resumeLink",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_emailAddress",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_phone",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_jobSeekingStatus",
+				"type": "string"
 			}
 		],
 		"name": "createProfile",
 		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -37,7 +108,7 @@
 		],
 		"name": "endorseProfile",
 		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -49,6 +120,13 @@
 		"inputs": [],
 		"name": "ImSorryTheProfileExists",
 		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [],
@@ -93,11 +171,27 @@
 		"type": "event"
 	},
 	{
-		"inputs": [],
-		"name": "withdraw",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "Received",
+		"type": "event"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
 	},
 	{
 		"inputs": [],
@@ -150,6 +244,19 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "fee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -234,6 +341,21 @@
 				"internalType": "string",
 				"name": "resumeLink",
 				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "emailAddress",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "phone",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "jobSeekingStatus",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -248,6 +370,25 @@
 			}
 		],
 		"name": "profileToOwner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "returnAddressFromIdNumber",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -304,6 +445,30 @@
 				"internalType": "address[]",
 				"name": "",
 				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_whoseThatProfile",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_endorser",
+				"type": "address"
+			}
+		],
+		"name": "returnEndorsementsAddressesAndVerifyAgainstEndorser",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -371,6 +536,21 @@
 						"internalType": "string",
 						"name": "resumeLink",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "emailAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "phone",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "jobSeekingStatus",
+						"type": "string"
 					}
 				],
 				"internalType": "struct AnonStars.Profile",
@@ -409,6 +589,21 @@
 			{
 				"internalType": "string",
 				"name": "resumeLink",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "emailAddress",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "phone",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "jobSeekingStatus",
 				"type": "string"
 			}
 		],

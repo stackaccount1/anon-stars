@@ -381,6 +381,25 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "returnAddressFromIdNumber",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "returnEndorsementId",
 		"outputs": [
@@ -570,6 +589,21 @@
 			{
 				"internalType": "string",
 				"name": "resumeLink",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "emailAddress",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "phone",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "jobSeekingStatus",
 				"type": "string"
 			}
 		],
