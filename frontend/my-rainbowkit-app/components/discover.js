@@ -16,7 +16,7 @@ export default function Discover() {
   const [profileFour, setProfileFour] = useState("");
   const [profileFive, setProfileFive] = useState("");
   const [profileSix, setProfileSix] = useState("");
-  const [count, setCount] = useState("7");
+  const [count, setCount] = useState("8");
   const [info0, setInfo0] = useState("");
   const [info1, setInfo1] = useState("");
   const [info2, setInfo2] = useState("");
