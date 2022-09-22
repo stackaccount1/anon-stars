@@ -141,9 +141,9 @@ contract AnonStars {
         string memory _phone,
         string memory _jobSeekingStatus
     ) public {
-        idToOwner[msg.sender] = id;
-        require(id > 0);
-        profiles[id] = Profile(
+        uint256 currentId = idToOwner[msg.sender];
+        require(currentId > 0);
+        profiles[currentId] = Profile(
             id,
             _username,
             _profilePictureUrl,

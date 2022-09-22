@@ -16,7 +16,7 @@ export default function Discover() {
   const [profileFour, setProfileFour] = useState("");
   const [profileFive, setProfileFive] = useState("");
   const [profileSix, setProfileSix] = useState("");
-  const [count, setCount] = useState("6");
+  const [count, setCount] = useState("7");
   const [info0, setInfo0] = useState("");
   const [info1, setInfo1] = useState("");
   const [info2, setInfo2] = useState("");
@@ -47,7 +47,7 @@ export default function Discover() {
 
   function populateArrayOfRand(count) {
     let numberListTransport = [];
-    for (let i = 0; i <= 6; i++) {
+    for (let i = 0; numberListTransport.length <= 6; i++) {
       let a = Math.floor(Math.random() * parseInt(count) + 1);
       if (numberListTransport.includes(a)) {
         console.log("already in list:", a);
@@ -243,12 +243,6 @@ export default function Discover() {
   const increment = () => {
     setCount((prev) => prev + 4);
   };
-
-  //Read From Contract
-  console.log("Read Addresses");
-  console.log(profileOne);
-  console.log(profileTwo);
-  console.log(profileThree);
 
   /*
   useEffect(() => {
