@@ -82,3 +82,7 @@ polygon v1 address
 polygon v2 address
 
 0xBeA72f666BC11EFe30293c801Cb8eE96a9C9245C
+
+polygon v3 address
+
+0x7AEfCB16a68B7b7fd37511D95039bF93965120Ae

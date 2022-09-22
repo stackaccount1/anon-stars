@@ -9,6 +9,12 @@ export default function Discover() {
   const { connector: activeConnector, isConnected, address } = useAccount();
   const [finalAddress, setAddress] = useState(address);
   const [endorsees, setEndorsees] = useState("");
+  const [profileOne, setProfileOne] = useState("");
+  const [profileTwo, setProfileTwo] = useState("");
+  const [profileThree, setProfileThree] = useState("");
+  const [profileFour, setProfileFour] = useState("");
+  const [profileFive, setProfileFive] = useState("");
+  const [profileSix, setProfileSix] = useState("");
   const [count, setCount] = useState("");
   const [info0, setInfo0] = useState("");
   const [info1, setInfo1] = useState("");
@@ -43,7 +49,7 @@ export default function Discover() {
     contractInterface: abiFile,
     functionName: "returnProfilesLength",
     onSuccess(data) {
-      console.log(data);
+      console.log("profiles length is:", data);
       setCount(data);
     },
   });
@@ -63,57 +69,83 @@ export default function Discover() {
       console.log(a);
     }
   }
+
   populateArrayOfRand(count);
   console.log(numberList);
 
   const readProfileOne = useContractRead({
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
-    functionName: "returnProfilesLength",
+    functionName: "returnAddressFromIdNumber",
+    args: numberList[0],
     onSuccess(data) {
       console.log(data);
-      setCount(data);
+      setProfileOne(data);
     },
   });
 
   const readProfileTwo = useContractRead({
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
-    functionName: "returnProfilesLength",
+    functionName: "returnAddressFromIdNumber",
+    args: numberList[1],
     onSuccess(data) {
       console.log(data);
-      setCount(data);
+      setProfileTwo(data);
     },
   });
 
   const readProfileThree = useContractRead({
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
-    functionName: "returnProfilesLength",
+    functionName: "returnAddressFromIdNumber",
+    args: numberList[2],
     onSuccess(data) {
       console.log(data);
-      setCount(data);
+      setProfileThree(data);
+    },
+  });
+
+  const readProfileFour = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "returnAddressFromIdNumber",
+    args: numberList[3],
+    onSuccess(data) {
+      console.log(data);
+      setProfileFour(data);
+    },
+  });
+
+  const readProfileFive = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "returnAddressFromIdNumber",
+    args: numberList[4],
+    onSuccess(data) {
+      console.log(data);
+      setProfileFive(data);
+    },
+  });
+
+  const readProfileSix = useContractRead({
+    addressOrName: contractAddresses[80001][0],
+    contractInterface: abiFile,
+    functionName: "returnAddressFromIdNumber",
+    args: numberList[5],
+    onSuccess(data) {
+      console.log(data);
+      setProfileSix(data);
     },
   });
 
   //Need to modify contract to move forward
 
-  const endorseesRead = useContractRead({
-    addressOrName: contractAddresses[80001][0],
-    contractInterface: abiFile,
-    functionName: "returnEndorsementsAddresses",
-    args: address,
-    onSuccess(data) {
-      console.log(data);
-      setEndorsees(data);
-    },
-  });
-
   const profileOneRead = useContractRead({
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "viewProfileStrings",
-    args: endorsees[0],
+    args: profileOne,
     onSuccess(data) {
       console.log(data);
       setInfo0(data[0]);
@@ -127,7 +159,7 @@ export default function Discover() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "viewProfileStrings",
-    args: endorsees[1],
+    args: profileTwo,
     onSuccess(data) {
       console.log(data);
       setInfo4(data[0]);
@@ -141,7 +173,7 @@ export default function Discover() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "viewProfileStrings",
-    args: endorsees[2],
+    args: profileThree,
     onSuccess(data) {
       console.log(data);
       setInfo8(data[0]);
@@ -155,7 +187,7 @@ export default function Discover() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "viewProfileStrings",
-    args: endorsees[3],
+    args: profileFour,
     onSuccess(data) {
       console.log(data);
       setInfo12(data[0]);
@@ -169,7 +201,7 @@ export default function Discover() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "viewProfileStrings",
-    args: "0x328B3fCA7E8C7e7137F0Facd17CE77739087a05d",
+    args: profileFive,
     onSuccess(data) {
       console.log(data);
       setInfo16(data[0]);
@@ -183,7 +215,7 @@ export default function Discover() {
     addressOrName: contractAddresses[80001][0],
     contractInterface: abiFile,
     functionName: "viewProfileStrings",
-    args: endorsees[4],
+    args: profileSix,
     onSuccess(data) {
       console.log(data);
       setInfo20(data[0]);
