@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { contractAddresses, abiFile, alchemyKey } from "../constants";
 import { ethers } from "ethers";
+import Link from "next/link";
 import { useSigner, useAccount, useConnect, useContractRead } from "wagmi";
 import Endorse from "./endorse";
 
@@ -280,12 +281,17 @@ export default function Discover() {
                 <p class="font-light leading-relaxed text-slate-600 mb-4">
                   {info2}
                 </p>
-                <a
-                  href="javascript:;"
-                  class="font-normal text-slate-700 hover:text-slate-400"
+                <Link
+                  href="/viewprofile/[pid]"
+                  as={"/viewprofile/" + profileOne}
                 >
-                  Link to profile!
-                </a>
+                  <a
+                    href="javascript:;"
+                    class="font-normal text-slate-700 hover:text-slate-400"
+                  >
+                    Link to profile!
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -319,12 +325,17 @@ export default function Discover() {
                 <p class="font-light leading-relaxed text-slate-600 mb-4">
                   {info6}
                 </p>
-                <a
-                  href="javascript:;"
-                  class="font-normal text-slate-700 hover:text-slate-400"
+                <Link
+                  href="/viewprofile/[pid]"
+                  as={"/viewprofile/" + profileTwo}
                 >
-                  Link to profile!
-                </a>
+                  <a
+                    href="javascript:;"
+                    class="font-normal text-slate-700 hover:text-slate-400"
+                  >
+                    Link to profile!
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -358,12 +369,17 @@ export default function Discover() {
                 <p class="font-light leading-relaxed text-slate-600 mb-4">
                   {info10}
                 </p>
-                <a
-                  href="javascript:;"
-                  class="font-normal text-slate-700 hover:text-slate-400"
+                <Link
+                  href="/viewprofile/[pid]"
+                  as={"/viewprofile/" + profileThree}
                 >
-                  Link to profile!
-                </a>
+                  <a
+                    href="javascript:;"
+                    class="font-normal text-slate-700 hover:text-slate-400"
+                  >
+                    Link to profile!
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -397,12 +413,17 @@ export default function Discover() {
                 <p class="font-light leading-relaxed text-slate-600 mb-4">
                   {info14}
                 </p>
-                <a
-                  href="javascript:;"
-                  class="font-normal text-slate-700 hover:text-slate-400"
+                <Link
+                  href="/viewprofile/[pid]"
+                  as={"/viewprofile/" + profileFour}
                 >
-                  Link to profile!
-                </a>
+                  <a
+                    href="javascript:;"
+                    class="font-normal text-slate-700 hover:text-slate-400"
+                  >
+                    Link to profile!
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -436,12 +457,17 @@ export default function Discover() {
                 <p class="font-light leading-relaxed text-slate-600 mb-4">
                   {info18}
                 </p>
-                <a
-                  href="javascript:;"
-                  class="font-normal text-slate-700 hover:text-slate-400"
+                <Link
+                  href="/viewprofile/[pid]"
+                  as={"/viewprofile/" + profileFive}
                 >
-                  Link to profile!
-                </a>
+                  <a
+                    href="javascript:;"
+                    class="font-normal text-slate-700 hover:text-slate-400"
+                  >
+                    Link to profile!
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -475,12 +501,17 @@ export default function Discover() {
                 <p class="font-light leading-relaxed text-slate-600 mb-4">
                   {info22}
                 </p>
-                <a
-                  href="javascript:;"
-                  class="font-normal text-slate-700 hover:text-slate-400"
+                <Link
+                  href="/viewprofile/[pid]"
+                  as={"/viewprofile/" + profileSix}
                 >
-                  Link to profile!
-                </a>
+                  <a
+                    href="javascript:;"
+                    class="font-normal text-slate-700 hover:text-slate-400"
+                  >
+                    Link to profile!
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
