@@ -8,7 +8,9 @@ Solidity, Hardhat, React, Next.js, Deployed on Polygon/Optimism. Pay the contrac
 
 
 
-https://user-images.githubusercontent.com/61128114/191338787-9b4eacf9-51dc-40f5-9e17-ae950936a3da.mp4
+https://user-images.githubusercontent.com/61128114/192078680-759108c2-026c-403a-942b-b5490ebfe86b.mp4
+
+
 
 
 
