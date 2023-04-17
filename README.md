@@ -1,4 +1,4 @@
-# Anon-Stars - On Chain Anonymous Linked In 
+# Anon-Stars - On Chain Anonymous Linked In Social Media Site 
 ETH Online 2022 - anon stars
 
 On chain anonymous linked in. Make hiring anonymous contributors easy. Endorse anon peers, and collect competency poaps to display on your profile. 
